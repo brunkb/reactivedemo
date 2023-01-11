@@ -38,7 +38,7 @@ public class DemoController {
     @PostMapping(value = "/domorestuff/{uuid}")
     public Mono<Integer> doStuffWithServiceCall(@RequestBody byte[] profileAvatar, @PathVariable String uuid) {
 
-        return virusCheckProfileAvatar(profileAvatar).map(profileResponse -> someService.updateProfile(profileAvatar, uuid, profileResponse));
+        return virusCheckProfileAvatar(profileAvatar).flatMap(profileResponse -> someService.updateProfile(profileAvatar, uuid, profileResponse));
     }
 
     private Mono<ProfileResponse> virusCheckProfileAvatar(byte[] profileAvatar) {
